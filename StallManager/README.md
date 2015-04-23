@@ -1,62 +1,111 @@
-### StallManager App
+# Stall Manager App
+##*Payment and Rewards Management System (PReMS)*
 
-#### Current progress
+## 1 Introduction
 
-1. Main page (StallManagerActivity.java)
-	- Add Customer: direct the stall manager to Add Customer page (AddEditCustomerActivity.java)
-	- View Customer: direct stall manager to View Customer page (ViewCustomerActivity.java)
-<br><br>
-2. Add Customer page (AddEditCustomerActivity.java)
-	- Stall manager input area: First Name, Last Name, Zip Code, and Email; (Email address will be checked if it is a valid email address)
-	- Add button (3 actions included): 
-		- Creat a Customer object with stall manager input information. Stall manager must input all fields otherwise a message will pop up; 
-		- Save the object to a table called "customerList" in the database "stallmanager.db";
-		- Direct to View Customer page (ViewCustomerActivity.java)
-	- Clear button: clear stall manager input 
-	- Back button: back to main page 
-<br><br>
-3. View Customer page (ViewCustomerActivity.java)
-	- ListView: 
-		- show the list of customers, customers are listed by ascending order of their last name, first name, zip code and email;
-		- when clicking one customer, the selected item will be highlighted in blue color; 
-		- after clicking one customer, then clicking one of the six buttons below would implement the corresponding action. 
-	*(Before clicking any button below except for "Back", a customer has to be selected first, otherwise a dialog window will pop up)*
-	- Add Purchase Button: direct to Add Purchase page; (AddPurchaseActivity.java)
-	- View Purchase Button: direct to View Purchase page; (ViewPurchaseActivity.java)
-	- View Rewards Button: direct to View Rewards page; (ViewRewardsActivity.java)
-	- Edit Button: direct to the Edit Customer page; (AddEditCustomerActivity.java)
-	- Delete Button: a dialog will pop up to confirm with the stall manager if he/she really wants to delete the selected customer. If "No" then return to the view customer page, if "YES" then delete the selected customer from both database and list view;
-	- Back Button: back to Main page.
-<br><br>
-4. Edit Customer page (AddEditCustomerActivity.java)
-	- Stall manager input area: will display the information of the customer that stall manager selected from View Customer page.
-	- Update Button:
-		- after revising cutomer's information, clicking this button will update the customer's information in the database; (Email will be checked if it is valid)
-		- will direct to View Customer page;
-		- customer list in View Customer page will be updated.
-	- Clear button: clear input area
-	- Back Button: back to View Customer page 
-<br><br>
-5. View Purchase page (ViewPurchaseActivity.java) and View Rewards page (ViewRewardsActivity.java) 
-	- Back Button: direct back to View Customer page
-	- Show a customer's all purchases details
-<br><br>
-6. Add Purchase page (AddPurchaseActivity.java)
-	- Stall manager input the total purchase amount
-	- "+" button: after clicking, the screen will show total purchase amount, gold discount amount, reward amount and adjusted total amount.
-	- "-" button: will clear screen
-	- "Check Out" button will trigger the following actions:
-		- implement the CreditCardService first to get card info, a dialog window will pop up if card reading fails;
-		- implement the PaymentService with card info and adjusted total amount, a dialog window will pop up if payment fails;
-		- save purchase to database;
-		- update customer's rewards balance and year to date spending and gold status;
-		- send email, a dialog window will pop up to show if sending email succeeds;
-		- clear input.
-<br><br>
-7. Customer.java ---- Customer class
-8. Purchase.java ---- Customer class
-9. CustomerHandler.java 
-	- a class that help handle database;
-	- add customer object to database and retrieve customer objects from database;	
-	- delete customer object from database and update customer information in database
-	- add purchase object to database
+Payment and Rewards Management System (PReMS) is an android based application that will allow for the management and tracking of loyal customer's purchases and rewards.  It is intended to be used by a mobile shop manager.
+
+## 2 Business Needs/Requirements
+
+There currently is not a good mobile point of sale (PoS) solution that will allow for a mobile shop manager process payments, track a customer's purchases, and allow for any type of rewards program.
+
+Mobile shop managers will benefit from a solution that is as mobile as their buisness.  Creating an application on the android platform will allow for a shop manager to process credit card transactions as well as track purchases.  The ability to track purchases will allow for the shop manager to implement a rewards program for their most loyal customers.
+
+## 3 Product / Solution Overview
+
+PReMS will be an android based application that will process payments, store purchase information and track rewards information.  This system will also e-mail customers when they have earned a reward in the rewards program.
+
+
+
+## 4 User Manual
+PReMS has two main operations: ***Customer Account Management*** and ***Purchase Management***. The following sections will give an overview of the various operations of the PReMS and how to perform those.
+
+------------
+
+##### Customer Account Management
+
+PReMS will start from "Stall Manager" page.
+
+###### Add a new customer.
+
+* Select **Add Customer** to add the following customer information:
+
+  -- First Name
+  
+  -- Last Name
+  
+  -- Zip Code
+  
+  -- E-mail Address
+  
+
+* **Add** button to add customer information and go to customer list view
+
+* **Clear** button to clear off the information put on the screen
+
+* **Back** button to go back to "Stall Manager" page
+
+###### View customer.
+* Select **View Customer** to show customer information from 
+customer list
+
+* Select the customer which you want to check for details, it will be highlighted
+
+* **View Purchase** Button: direct to View Purchase history
+
+* **View Rewards** Button: direct to View Rewards details
+
+* **Back** Button to go back to "Stall Manager" page
+
+###### Edit customer.
+* Select **View Customer** to show customer information from customer list
+
+* Select the customer to be edited, it will be highlighted
+
+* **Edit** button to go to customer information
+
+* **Update** when you complete editing customer information 
+
+* **Back** Button to go back to "Stall Manager" page
+
+###### Delete customer
+* Select **View Customer** to show customer information from customer list
+
+* Select the customer to be deleted, it will be highlighted 
+
+* **Delete** button to delete customer account
+
+* **Back** button to go back to "Stall Manager" page
+
+
+----------
+
+##### Purchase Management
+
+PReMS will start from "Stall Manager" page.
+
+###### Adding a purchase
+* if the customer is a new customer, add customer first (refer to Customer Account Management => Add a new customer)
+
+* Select **View Customer**, for customer who is an existing customer has an account
+
+* Select the customer on the list, it will be highlighted
+
+* **Add Purchase** to input new purchase
+
+* Enter total purchase then Press **"+"** button: after clicking, the screen will show total purchase amount, gold discount amount, reward amount and adjusted total amount.
+
+* **"-"** button: will clear screen 
+
+* **Check out** button to complete the current transaction, Rewards balance and Gold Status notice emails will be sent automatically as needed
+
+* **Back** button to go back to previous view
+
+----------
+
+#### Requirements
+##### Platform
+PReMS is designed to run on the Android 4.1+ platform.
+
+##### Network Connectivity
+PReMS requires network connectivity in order to send emails to customer. If network connectivity is temporarily unavailable PReMS will not send purchase information or rewards balance to customer.
